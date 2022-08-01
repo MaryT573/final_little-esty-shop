@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/', to: "welcome#index"
   get "/merchants/:id/dashboard", to: "merchants#show"
   get '/merchants/:id/items/new', to: 'items#new'
+  patch '/merchants/:id/items/:id', to: 'items#update'
 
   resources :merchants, except: [:show] do
     resources :items, only: [:index, :show, :edit, :update]
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   patch '/merchants/:id/items', to: 'items#status'
+
 
   post '/merchants/:id/items', to: 'items#create'
   

@@ -8,7 +8,7 @@
   <div id = "item-<%= item.id %>">
   <ul><li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" 
   %>
-  <%= button_to "Disable Item", "/merchants/#{item.id}/items", method: :patch %>
+  <%= button_to "Disable Item", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: :disabled}, method: :patch %>
   </li></ul>
   </div>
 <% end %>
@@ -20,7 +20,7 @@
   <div id = "item-<%= item.id %>">
   <ul><li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" 
   %>
-  <%= button_to "Enable Item", "/merchants/#{item.id}/items", method: :patch %>
+  <%= button_to "Enable Item", "/merchants/#{@merchant.id}/items/#{item.id}", params: {status: :enabled}, method: :patch %>
   </li></ul>
   </div>
 <% end %>
