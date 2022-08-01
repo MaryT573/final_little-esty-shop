@@ -2,11 +2,9 @@ Rails.application.routes.draw do
 
   get '/', to: "welcome#index"
   get "/merchants/:id/dashboard", to: "merchants#show"
-  get '/merchants/:id/items/new', to: 'items#new'
-  patch '/merchants/:id/items/:id', to: 'items#update'
 
   resources :merchants, except: [:show] do
-    resources :items, only: [:index, :show, :edit, :update]
+    resources :items, only: [:index, :show, :edit, :update, :new]
     resources :invoices, only: [:index, :show, :update]
   end
 

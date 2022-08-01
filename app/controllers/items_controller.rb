@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :find_merchant, only: [:index, :edit, :show]
+  before_action :find_merchant, only: [:index, :edit, :show, :new]
   before_action :find_item, only: [:edit, :show, :update]
 
 
@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @merchant = Merchant.find(params[:id])
+    
   end
 
   def create
