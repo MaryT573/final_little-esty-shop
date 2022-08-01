@@ -17,7 +17,7 @@
 <% @merchants.return_by_status_enabled.each do |merchant| %>
   <div id="merchant_enabled-<%=merchant.id%>">
     <p><%= link_to "#{merchant.name}" , "/admin/merchants/#{merchant.id}"%>
-      <%= button_to "Disable #{merchant.name}", "/admin/merchants?disable=#{params[:disable]}", method: :patch, local: true, params: {id: merchant.id}%> </p>
+    <%= button_to "Disable #{merchant.name}", "/admin/merchants?disable=#{params[:disable]}", method: :patch, local: true, params: {id: merchant.id}%> </p>
   </div>
 <% end %>
 
