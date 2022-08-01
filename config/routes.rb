@@ -2,20 +2,15 @@ Rails.application.routes.draw do
 
   get '/', to: "welcome#index"
   get "/merchants/:id/dashboard", to: "merchants#show"
-  get '/merchants/:id/items/new', to: 'items#new'
-  patch '/merchants/:id/items/:id', to: 'items#update'
 
   resources :merchants, except: [:show] do
-    resources :items, only: [:index, :show, :edit, :update]
+    resources :items, only: [:index, :show, :edit, :update, :new]
     resources :invoices, only: [:index, :show, :update]
   end
 
   namespace :admin do
     resources :invoices, only: [:index, :show, :update]
   end
-
-  patch '/merchants/:id/items', to: 'items#status'
-
 
   post '/merchants/:id/items', to: 'items#create'
   
@@ -28,10 +23,5 @@ Rails.application.routes.draw do
   patch '/admin/merchants/:id', to: 'admin_merchants#update'
   patch '/admin/merchants', to: 'admin_merchants#index'
   post '/admin/merchants', to: 'admin_merchants#create'
-
-  # get '/admin/invoices', to: 'admin_invoices#index'
-  # get '/admin/invoices/:id', to: 'admin_invoices#show'
-
-  # patch '/admin/invoices/:id', to: 'admin_invoices#update'
   
 end
