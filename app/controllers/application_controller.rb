@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     @merchant = Merchant.find(params[:merchant_id])
   end
 
+  def find_invoice_item
+    @invoice_item = InvoiceItem.find(params[:invoice_item_id])
+  end
+
   private
   def error_message(errors)
     errors.full_messages.join(', ')
