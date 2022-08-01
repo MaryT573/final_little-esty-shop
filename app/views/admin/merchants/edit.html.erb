@@ -1,4 +1,4 @@
-<%= form_with url: "/admin/merchants/#{@merchant_edit.id}", method: :patch, local: true do |form|%>
+<%= form_with url: "/admin/merchants/#{@merchant.id}", method: :patch, local: true do |form|%>
   <%= form.label :name %>
   <%= form.text_field :name %>
   <%= form.submit "Update Merchant" %>
