@@ -18,9 +18,9 @@ class ItemsController < ApplicationController
   def create
     item = Item.new(name: params[:name], description: params[:description],unit_price: params[:unit_price], merchant_id: params[:id], status: 1)
     if item.save
-      redirect_to "/merchants/#{item.merchant_id}/items"
+      redirect_to merchant_items_path(item.merchant_id)
     else
-      redirect_to "/merchants/#{item.merchant.id}/items/new"
+      redirect_to "/merchants/#{item.merchant_id}/items/new" 
       flash[:alert] = "Error: #{error_message(item.errors)}" 
     end
   end
@@ -32,17 +32,17 @@ class ItemsController < ApplicationController
   def update
     if params[:status] == "enabled"
       @item.update(status: "enabled")
-      redirect_to "/merchants/#{@item.merchant.id}/items"
+      redirect_to merchant_items_path(@item.merchant_id)
       flash[:alert] = "#{@item.name} has been enabled."
     elsif params[:status] == "disabled"
       @item.update(status: "disabled")
-      redirect_to "/merchants/#{@item.merchant.id}/items"
+      redirect_to merchant_items_path(@item.merchant_id)
       flash[:alert] = "#{@item.name} has been disabled."
     elsif @item.update(item_params)
-      redirect_to "/merchants/#{@item.merchant.id}/items/#{@item.id}"
+      redirect_to merchant_item_path(@item.merchant_id, @item.id)
       flash[:alert] = "Success: Item information successfully updated"
     else
-      redirect_to "/merchants/#{@item.merchant.id}/items/#{@item.id}/edit"
+      redirect_to "/merchants/#{@item.merchant_id}/items/#{@item.id}/edit"
       flash[:alert] = "Error: #{error_message(@item.errors)}"
     end
   end
