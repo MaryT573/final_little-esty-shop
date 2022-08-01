@@ -1,6 +1,7 @@
-class AdminMerchantsController < ApplicationController
+class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
+    #require "pry"; binding.pry
     if params[:enable]
       merchant = Merchant.find(params[:id])
       merchant.update(status: "enabled")
@@ -11,12 +12,13 @@ class AdminMerchantsController < ApplicationController
       merchant.save
     end
   end
+
   def show
     @merchant = Merchant.find(params[:id])
   end
 
   def edit
-    @merchant_edit = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:id])
   end
 
   def update
