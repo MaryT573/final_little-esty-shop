@@ -1,4 +1,4 @@
-class AdminMerchantsController < ApplicationController
+class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
     if params[:enable]
@@ -11,12 +11,13 @@ class AdminMerchantsController < ApplicationController
       merchant.save
     end
   end
+
   def show
     @merchant = Merchant.find(params[:id])
   end
 
   def edit
-    @merchant_edit = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:id])
   end
 
   def update
