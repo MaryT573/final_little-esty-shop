@@ -5,12 +5,12 @@ class GithubSearch
   end
 
   def contributors
-    if service.contributors[:message]
-      []
-    else
+    if service.contributors.class == Array
       service.contributors.map do |contributor|
         "#{contributor[:login]} - #{contributor[:contributions]} commits"
       end
+    else
+      []
     end
   end
 

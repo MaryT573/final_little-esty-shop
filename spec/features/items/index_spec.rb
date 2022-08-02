@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Index', vcr: 'tests' do
+RSpec.describe 'Merchant Items Index', vcr: 'tests', :allow_playback_repeats => true do
   before :each do
     @merchant1 = Merchant.create!(name: "Calvin Klein")
     @merchant2 = Merchant.create!(name: "Marc Jacobs")

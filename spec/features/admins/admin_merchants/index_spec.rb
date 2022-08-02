@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin_merchants index', vcr: 'tests' do
+RSpec.describe 'the admin_merchants index', vcr: 'tests', :allow_playback_repeats => true do
   it 'shows the names of all of the merchants' do
     merchant_1 = Merchant.create!(name: "Wizards Chest")
     merchant_2 = Merchant.create!(name: "Tattered Cover")

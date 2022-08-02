@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Show Page', type: :feature, vcr: 'tests' do
+RSpec.describe 'Admin Show Page', type: :feature, vcr: 'tests', :allow_playback_repeats => true do
   it 'shows the invoice and the invoice information' do
     merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
 
