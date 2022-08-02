@@ -28,3 +28,5 @@
 
 echo coverage >> .gitignore
 /coverage
+
+/spec/fixtures
