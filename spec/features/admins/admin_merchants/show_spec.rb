@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin index' do
+RSpec.describe 'the admin index', vcr: 'tests_2', :allow_playback_repeats => true do
   it 'can update merchant information' do
     merchant_1 = Merchant.create!(name: "Wizards Chest")
 

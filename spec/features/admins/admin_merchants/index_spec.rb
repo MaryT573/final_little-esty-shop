@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin_merchants index' do
+RSpec.describe 'the admin_merchants index', vcr: 'tests', :allow_playback_repeats => true do
   it 'shows the names of all of the merchants' do
     merchant_1 = Merchant.create!(name: "Wizards Chest")
     merchant_2 = Merchant.create!(name: "Tattered Cover")
@@ -14,7 +14,7 @@ RSpec.describe 'the admin_merchants index' do
     expect(page).to have_content("Powell's City of Books")
   end
 
-  it 'has links to the merchants show page' do
+  it 'has links to the merchants show page', vcr: 'tests_1' do
     merchant_1 = Merchant.create!(name: "Wizards Chest")
     merchant_2 = Merchant.create!(name: "Tattered Cover")
     merchant_3 = Merchant.create!(name: "Powell's City of Books")
@@ -49,7 +49,7 @@ RSpec.describe 'the admin_merchants index' do
     end
   end
 
-  it "clicking button changes status" do
+  it "clicking button changes status", vcr: 'tests_2' do
     merchant_1 = Merchant.create!(name: "Wizards Chest", status: "disabled")
 
     visit '/admin/merchants'
@@ -64,6 +64,9 @@ RSpec.describe 'the admin_merchants index' do
     within "#merchant_enabled-#{merchant_1.id}" do
       expect(page).to have_button("Disable #{merchant_1.name}")
     end
+
+    click_button("Disable #{merchant_1.name}")
+    expect(current_path).to eq('/admin/merchants')
   end
 
   it 'sort merchants into groups by status' do
@@ -83,7 +86,7 @@ RSpec.describe 'the admin_merchants index' do
     end
   end
 
-  it 'can create new merchants' do
+  it 'can create new merchants', vcr: 'tests_2' do
     visit '/admin/merchants'
 
     expect(page).to_not have_content("Cats!")
@@ -102,7 +105,7 @@ RSpec.describe 'the admin_merchants index' do
     expect(page).to have_button("Enable Cats!")
   end
 
-  it 'shows the top 5 merchants by revenue and when a merchant id is clicked, it redirects to that merchants admin show page' do
+  it 'shows the top 5 merchants by revenue and when a merchant id is clicked, it redirects to that merchants admin show page', vcr: 'tests_1' do
 
       customer_1 = Customer.create!(first_name: "A", last_name: "A")
 

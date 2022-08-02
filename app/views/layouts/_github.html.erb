@@ -1,3 +1,6 @@
-<% GithubService.contributors.each do |contributor| %>
+<p>Repo Name: <%= GithubSearch.new.repo_name %></p>
+<p>Contributors and commit count:</p>
+<% GithubSearch.new.contributors.each do |contributor| %>
   <p><%= contributor %></p>
 <% end %>
+<p> Total Merged Pull Requests: <%= GithubSearch.new.merged_pull_requests %></p>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Dashboard' do
+RSpec.describe 'Merchant Dashboard', vcr: 'tests', :allow_playback_repeats => true do
   it 'has the name of the merchant' do
     merchant = Merchant.create!(name: "Wizards Chest")
     merchant_2 = Merchant.create!(name: "REI")
@@ -11,7 +11,7 @@ RSpec.describe 'Merchant Dashboard' do
     expect(page).to_not have_content("REI")
   end
 
-  it 'has links to merchant items index and merchant invoices index' do
+  it 'has links to merchant items index and merchant invoices index', vcr: 'tests_3' do
     merchant = Merchant.create!(name: "Wizards Chest")
 
     visit "/merchants/#{merchant.id}/dashboard"
@@ -87,7 +87,7 @@ RSpec.describe 'Merchant Dashboard' do
     end
   end
 
-  it 'shows items ready to ship names, invoice id link and formatted date invoice created ordered oldest to newest' do
+  it 'shows items ready to ship names, invoice id link and formatted date invoice created ordered oldest to newest', vcr: 'tests_1' do
     customer_1 = Customer.create!(first_name: "A", last_name: "A")
 
     invoice_1 = Invoice.create!(status: "completed", customer_id: customer_1.id, created_at: "2022-07-22 00:00:00 UTC")
