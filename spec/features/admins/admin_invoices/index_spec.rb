@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin_invoices index' do
+RSpec.describe 'the admin_invoices index', vcr: 'tests_1', :allow_playback_repeats => true do
   it 'shows all invoice ids and links to thier show pages' do
     customer_1 = Customer.create!(first_name: "A", last_name: "A")
 

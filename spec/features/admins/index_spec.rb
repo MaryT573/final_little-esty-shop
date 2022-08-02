@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the admin index' do
+RSpec.describe 'the admin index', vcr: 'tests', :allow_playback_repeats => true do
   it 'shows the admin dashboard' do
     visit '/admin'
     expect(current_path).to eq('/admin')
@@ -8,7 +8,7 @@ RSpec.describe 'the admin index' do
     expect(page).to have_content("Admin Dashboard")
   end
 
-  it 'has links to admin merchants and admin invoices index' do
+  it 'has links to admin merchants and admin invoices index', vcr: 'tests_3' do
     visit '/admin'
     expect(current_path).to eq('/admin')
 
@@ -83,7 +83,7 @@ RSpec.describe 'the admin index' do
     end
   end
 
-  it 'has incomplete invoices and links' do
+  it 'has incomplete invoices and links', vcr: 'tests_1' do
     customer_1 = Customer.create!(first_name: "A", last_name: "A")
 
     invoice_1 = Invoice.create!(status: "completed", customer_id: customer_1.id)
