@@ -1,7 +1,6 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
-    #require "pry"; binding.pry
     if params[:enable]
       merchant = Merchant.find(params[:id])
       merchant.update(status: "enabled")
