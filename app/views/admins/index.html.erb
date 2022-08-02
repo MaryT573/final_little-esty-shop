@@ -1,13 +1,31 @@
 
-<h1>Admin Dashboard</h1>
-<p> <%= link_to "Merchants", "/admin/merchants" %> </p>
-<p> <%= link_to "Invoices", "/admin/invoices" %> </p>
+<ul class="nav nav-pills">
+<li class="nav-item navbar-left">
+<a class="nav-link disabled" href="">Admin Dashboard</a>
+</li>
+<li class="nav-item navbar-right">
+<a class="nav-link" href="/admin/invoices">Invoices</a>
+</li>
+<li class="nav-item navbar-right">
+<a class="nav-link" href="/admin/merchants">Merchants</a>
+</li>
+<li class="nav-item navbar-right">
+<a class="nav-link" href="/admin">Dashboard</a>
+</li>
+</ul>
 
-<div id="top-customers"><h5>Top Customers</h5>
+<table class = "table">
+<thead>
+<tr>
+<h5>Top Customers</h5>
+</tr>
+</thead>
+<div id="top-customers">
   <% @customers.top_customers.each_with_index do |customer, index| %>
   <p><%= "#{index + 1}. #{customer.full_name} - #{customer.transaction_count} purchases" %></p>
   <% end %>
 </div>
+</table>
 
 <div id="incomplete_invoices"><h5>Incomplete Invoices</h5>
   <% @invoices.order_by_date.each do |invoice| %>
