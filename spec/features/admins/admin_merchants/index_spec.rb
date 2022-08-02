@@ -64,6 +64,9 @@ RSpec.describe 'the admin_merchants index' do
     within "#merchant_enabled-#{merchant_1.id}" do
       expect(page).to have_button("Disable #{merchant_1.name}")
     end
+
+    click_button("Disable #{merchant_1.name}")
+    expect(current_path).to eq('/admin/merchants')
   end
 
   it 'sort merchants into groups by status' do
