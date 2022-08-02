@@ -5,8 +5,12 @@ class GithubSearch
   end
 
   def contributors
-    service.contributors.map do |contributor|
-      "#{contributor[:login]} - #{contributor[:contributions]} commits"
+    if service.contributors[:message]
+      []
+    else
+      service.contributors.map do |contributor|
+        "#{contributor[:login]} - #{contributor[:contributions]} commits"
+      end
     end
   end
 
