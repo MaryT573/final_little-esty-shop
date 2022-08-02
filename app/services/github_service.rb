@@ -9,7 +9,6 @@ class GithubService
   end
 
   def merged_pull_requests
-    # json["total_count"]
     get_url('https://api.github.com/search/issues?q=repo:jusrez/little-esty-shop%20type:pr%20is:merged')
   end
 

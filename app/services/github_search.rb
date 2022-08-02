@@ -1,5 +1,3 @@
-require_relative 'github_service'
-
 class GithubSearch
 
   def repo_name
