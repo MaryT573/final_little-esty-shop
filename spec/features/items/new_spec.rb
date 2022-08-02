@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Item Create' do
+RSpec.describe 'Item Create', vcr: 'tests_2' do
 
   it 'will show me a form that will allow me to create a new item and when I click submit it will take me to the items index page where i will see the item i created in the disabled items list' do
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Index' do
+RSpec.describe 'Merchant Items Index', vcr: 'tests' do
   before :each do
     @merchant1 = Merchant.create!(name: "Calvin Klein")
     @merchant2 = Merchant.create!(name: "Marc Jacobs")
@@ -38,7 +38,7 @@ RSpec.describe 'Merchant Items Index' do
         expect(page).to_not have_content(@item6.name)
       end
 
-      it 'i see a button next to each item name that will disable or enable that item. When I click this button then i am redirected back to the items index and i see that the items status has changed' do
+      it 'i see a button next to each item name that will disable or enable that item. When I click this button then i am redirected back to the items index and i see that the items status has changed', vcr: 'tests_2' do
         
         visit "/merchants/#{@merchant1.id}/items"
      
@@ -84,7 +84,7 @@ RSpec.describe 'Merchant Items Index' do
         end
       end
 
-      it 'will have a link to create a new item, when I click on the link, i am taken to a form that allows me to add item information' do
+      it 'will have a link to create a new item, when I click on the link, i am taken to a form that allows me to add item information', vcr: 'tests_1' do
         
         visit "/merchants/#{@merchant1.id}/items"
 
@@ -94,8 +94,9 @@ RSpec.describe 'Merchant Items Index' do
       end
       
     end
+
     describe 'when i click on the name of an item from the merchant items index page' do
-      it 'I am taken to that merchant items show page and i see all of the items attributes' do
+      it 'I am taken to that merchant items show page and i see all of the items attributes', vcr: 'tests_1' do
 
         visit "/merchants/#{@merchant1.id}/items"
 
@@ -119,7 +120,7 @@ RSpec.describe 'Merchant Items Index' do
   end
 end
 
-RSpec.describe 'Merchant Items Index' do
+RSpec.describe 'Merchant Items Index', vcr: 'tests' do
   it 'displays 5 most popular item names ranked by total rev generated with links and total revenue' do
     customer_1 = Customer.create!(first_name: "A", last_name: "A")
 

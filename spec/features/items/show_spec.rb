@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Items Show' do
+RSpec.describe 'Merchant Items Show', vcr: 'tests_1' do
   before :each do
     @merchant1 = Merchant.create!(name: "Calvin Klein")
     @merchant2 = Merchant.create!(name: "Marc Jacobs")

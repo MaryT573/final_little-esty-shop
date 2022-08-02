@@ -1,6 +1,6 @@
 require 'rails_helper'
 
- RSpec.describe 'Item Edit' do
+ RSpec.describe 'Item Edit', vcr: 'tests_2' do
    before :each do
     @merchant1 = Merchant.create!(name: "Calvin Klein")
     @merchant2 = Merchant.create!(name: "Marc Jacobs")

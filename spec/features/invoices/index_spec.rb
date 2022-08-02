@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant Invoices Index Page', type: :feature do
+RSpec.describe 'Merchant Invoices Index Page', type: :feature, vcr: 'tests' do
   it "visits the merchant invoices index and sees all invoices that include at least one of the merchant's items" do
     merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
     merchant_2 = Merchant.create!(id: 2, name: "Shoes Central", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
@@ -36,7 +36,7 @@ RSpec.describe 'Merchant Invoices Index Page', type: :feature do
 
   end
 
-  it "clicks on an invoice id and is taken to that invoice id show page" do
+  it "clicks on an invoice id and is taken to that invoice id show page", vcr: 'tests_1' do
     merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
 
     item_1 = merchant_1.items.create!(id: 1, merchant_id: merchant_1.id, name: "Charizard Rare", description: "Mint Condition Charizard", unit_price: 13984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")

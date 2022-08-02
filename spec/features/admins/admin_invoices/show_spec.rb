@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Show Page', type: :feature do
+RSpec.describe 'Admin Show Page', type: :feature, vcr: 'tests' do
   it 'shows the invoice and the invoice information' do
     merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
 
@@ -82,7 +82,7 @@ RSpec.describe 'Admin Show Page', type: :feature do
     expect(page).to have_no_content("Total Revenue: $12.30")
   end
 
-  it "sees an invoice's current status as a select field and when a new status is selected and submitted, it updates that status on the page" do
+  it "sees an invoice's current status as a select field and when a new status is selected and submitted, it updates that status on the page", vcr: 'tests_1' do
     merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
 
     item_1 = merchant_1.items.create!(id: 1, merchant_id: merchant_1.id, name: "Charizard Rare", description: "Mint Condition Charizard", unit_price: 13984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
