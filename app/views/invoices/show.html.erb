@@ -1,24 +1,36 @@
-<h1>Invoice: <%=@invoice.id%> </h1>
+<h4><center>Invoice: <%=@invoice.id%></center></h4>
 
-<p>Invoice Status: <%= @invoice.status %></p>
-<p>Created at: <%= @invoice.created_at.strftime( "%A, %B, %d, %Y") %></p>
-<p>Customer first name: <%= @invoice.customer.first_name %></p>
-<p>Customer last name: <%= @invoice.customer.last_name %></p>
+<p>Status: <%= @invoice.status %></p>
+<p>Created on: <%= @invoice.created_at.strftime( "%A, %B, %d, %Y") %></p>
+<p>Total Revenue: <%=number_to_currency(@invoice.total_revenue)%></p>
 
-<p><b>Invoice Items</b></p>
+<h4>Customer:</h4>
+<p><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+
+<table class = "table">
+<thead>
+<tr>
+<h4>Items on this Invoice</h4>
+<th>Item Name</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Status</th>
+</tr>
+<tbody>
 <% @invoice.invoice_items.each do |invoice_item|%>
+<tbody>
+<tr class="table-info">
 <div id="item_invoice-<%=invoice_item.id %>">
-<p>Item name: <%=invoice_item.item.name %></p>
-<p>Price: <%=number_to_currency(invoice_item.item.unit_price) %></p>
-<p>Quantity: <%=invoice_item.quantity %></p>
- 
- <p>Status: <%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
+<td><%=invoice_item.item.name %></td>
+<td><%=number_to_currency(invoice_item.item.unit_price) %></td>
+<td><%=invoice_item.quantity %></td>
+ <td><%= form_with url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
  <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
   <%= hidden_field_tag "invoice_item_id", "#{invoice_item.id}" %>
   <%= f.submit "Update Item Status" %>
-  <% end %>
-
-</div>
+  <% end %></td>
+</tr>
 <% end %>
-
-<p>Total Revenue: <%=number_to_currency(@invoice.total_revenue)%></p>
+</tbody>
+</table>
+</div>
