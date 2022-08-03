@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   post '/merchants/:id/items', to: 'items#create'
 
-  get '/admin', to: 'admins#index'
+  get '/admin', to: 'admin#index'
 
   get '/admin/merchants', to: 'admin/merchants#index'
   patch '/admin/merchants', to: 'admin/merchants#index'

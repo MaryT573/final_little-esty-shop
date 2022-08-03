@@ -14,7 +14,7 @@ require 'rails_helper'
     @item6 = Item.create!(name: "Sneakers", description: "Bone", unit_price: 122 , merchant_id: @merchant3.id)
   end
 
-  describe 'I see a form filled in with the existing item attribute information', vcr: 'test' do
+  describe 'I see a form filled in with the existing item attribute information', vcr: 'tests_3' do
     it 'when I update the information in the form and click submit i am redirected back to the item show page where i see the update information and see a flash message stating that the information has been succesfully updated' do
       
       visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
