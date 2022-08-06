@@ -4,6 +4,7 @@ RSpec.describe Merchant, type: :model do
 
   describe 'relationships' do
     it { should have_many(:items)}
+    it { should have_many(:bulkdiscounts)}
     it { should have_many(:invoice_items).through(:items) }
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:customers).through(:invoices) }
@@ -142,7 +143,7 @@ RSpec.describe Merchant, type: :model do
       transaction_5 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_5.id)
       transaction_6 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id)
       transaction_7 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id) #both failed
-        
+
       merchant = Merchant.create!(name: "Wizards Chest")
 
       item_1 = Item.create!(name: "A", description: "A", unit_price: 400, merchant_id: merchant.id)
@@ -179,7 +180,7 @@ RSpec.describe Merchant, type: :model do
       transaction_5 = Transaction.create!(result: "success", credit_card_number: "0000111122223333", invoice_id: invoice_5.id)
       transaction_6 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id)
       transaction_7 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_6.id) #both failed
-        
+
       merchant_1 = Merchant.create!(name: "Wizards Chest")
       merchant_2 = Merchant.create!(name: "Pirates Chest")
       merchant_3 = Merchant.create!(name: "Pokemon Chest")
