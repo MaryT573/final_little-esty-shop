@@ -6,6 +6,7 @@ class BulkdiscountsController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @discount = Bulkdiscount.find(params[:id])
   end
 
@@ -28,5 +29,22 @@ class BulkdiscountsController < ApplicationController
     merchant = Merchant.find(params[:merchant_id])
     Bulkdiscount.destroy(params[:id])
     redirect_to "/merchants/#{merchant.id}/bulkdiscounts"
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = Bulkdiscount.find(params[:id])
+  end
+
+  def update
+    merchant = Merchant.find(params[:merchant_id])
+    discount = Bulkdiscount.find(params[:id])
+    if params[:discount] > "1"
+      redirect_to "/merchants/#{merchant.id}/bulkdiscounts/#{discount.id}/edit"
+      flash[:alert] = "Can only accept numbers below 1"
+    else
+      merchant.bulkdiscounts.update(discount: params[:discount], threshold: params[:threshold])
+      redirect_to "/merchants/#{merchant.id}/bulkdiscounts/#{discount.id}"
+    end
   end
 end

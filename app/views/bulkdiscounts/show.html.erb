@@ -1,3 +1,4 @@
 <h1>Discount <%= @discount.id%></h1>
 <h2>Threshold: <%= @discount.threshold %></h2>
 <h2>Amount: <%= @discount.discount*100 %>%</h2>
+<h2><%= link_to "Update Discount", "/merchants/#{@merchant.id}/bulkdiscounts/#{@discount.id}/edit"%></h2>

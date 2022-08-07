@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :merchants, except: [:show] do
     resources :items, only: [:index, :show, :edit, :update, :new]
     resources :invoices, only: [:index, :show, :update]
-    resources :bulkdiscounts, only: [:index, :show, :new, :create, :destroy]
+    resources :bulkdiscounts, only: [:index, :show, :new, :create, :destroy, :edit, :update]
   end
 
   namespace :admin do
