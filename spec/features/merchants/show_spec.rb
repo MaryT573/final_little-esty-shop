@@ -4,7 +4,7 @@ RSpec.describe 'Merchant Dashboard', vcr: 'tests', :allow_playback_repeats => tr
   it 'has the name of the merchant' do
     merchant = Merchant.create!(name: "Wizards Chest")
     merchant_2 = Merchant.create!(name: "REI")
-    
+
     visit "/merchants/#{merchant.id}/dashboard"
 
     expect(page).to have_content("Wizards Chest")
@@ -63,7 +63,7 @@ RSpec.describe 'Merchant Dashboard', vcr: 'tests', :allow_playback_repeats => tr
     transaction_19 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
     transaction_20 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
     transaction_21 = Transaction.create!(result: "failed", credit_card_number: "0000111122223333", invoice_id: invoice_4.id)
-      
+
     merchant = Merchant.create!(name: "Wizards Chest")
 
     item = Item.create!(name: "A", description: "A", unit_price: 100, merchant_id: merchant.id)
@@ -130,5 +130,17 @@ RSpec.describe 'Merchant Dashboard', vcr: 'tests', :allow_playback_repeats => tr
       click_link("Invoice ##{invoice_1.id}")
       expect(current_path).to eq("/merchants/#{merchant.id}/invoices/#{invoice_1.id}")
     end
+  end
+
+  it 'can link to discounts' do
+    merchant1 = Merchant.create!(name: "Wizards Chest")
+    discount = merchant1.bulkdiscounts.create!(discount: 0.2, threshold: 4)
+
+    visit "/merchants/#{merchant1.id}/dashboard"
+
+    expect(page).to have_link("View Discounts")
+    click_link("View Discounts")
+
+    expect(current_path).to eq("/merchants/#{merchant1.id}/bulkdiscounts")
   end
 end
