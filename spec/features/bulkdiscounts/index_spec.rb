@@ -75,4 +75,37 @@ RSpec.describe 'Bulkdiscount index' do
     expect(page).to have_content("Can only accept numbers below 1")
     expect(current_path).to eq("/merchants/#{merchant1.id}/bulkdiscounts/new")
   end
+
+  it 'can delete selected discounts and leave others alone' do
+    merchant = Merchant.create!(name: "Wizards Chest")
+    discount = merchant.bulkdiscounts.create!(discount: 0.2, threshold: 4)
+    discount2 = merchant.bulkdiscounts.create!(discount: 0.6, threshold: 5)
+
+    visit "/merchants/#{merchant.id}/bulkdiscounts"
+
+    within "#discounts-#{discount2.id}" do
+      expect(page).to have_content(discount2.threshold)
+      expect(page).to have_content(discount2.id)
+      expect(page).to have_content("60.0%")
+    end
+
+    within "#discounts-#{discount.id}" do
+      expect(page).to have_content("Threshold: 4")
+      expect(page).to have_content("20.0%")
+      expect(page).to have_link("Delete Discount")
+      click_link("Delete Discount")
+    end
+
+    expect(current_path).to eq("/merchants/#{merchant.id}/bulkdiscounts")
+
+    expect(page).to_not have_content("Threshold: 4")
+    expect(page).to_not have_content("20.0%")
+
+    within "#discounts-#{discount2.id}" do
+      expect(page).to have_content(discount2.threshold)
+      expect(page).to have_content(discount2.id)
+      expect(page).to have_content("60.0%")
+    end
+  end
+  
 end

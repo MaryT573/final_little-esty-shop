@@ -6,5 +6,6 @@
   <h3>Threshold: <%= discount.threshold %></h3>
   <h3>Amount: <%= discount.discount*100 %>%</h3>
   <h3><%= link_to "View Discount", "/merchants/#{@merchant.id}/bulkdiscounts/#{discount.id}"%></h3>
+  <h3><%= link_to "Delete Discount", "/merchants/#{@merchant.id}/bulkdiscounts/#{discount.id}", method: :delete%></h3>
 </div>
 <% end %>
