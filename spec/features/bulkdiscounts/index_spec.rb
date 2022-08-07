@@ -36,4 +36,27 @@ RSpec.describe 'Bulkdiscount index' do
       expect(current_path).to eq("/merchants/#{merchant1.id}/bulkdiscounts/#{discount.id}")
     end
   end
+
+  it "can create new discount" do
+    merchant1 = Merchant.create!(name: "Wizards Chest")
+
+    visit "/merchants/#{merchant1.id}/bulkdiscounts"
+    expect(current_path).to eq("/merchants/#{merchant1.id}/bulkdiscounts")
+
+    expect(page).to_not have_content("Threshold: 5")
+    expect(page).to_not have_content("20.0%")
+
+    expect(page).to have_link("Create Discount")
+    click_link("Create Discount")
+    expect(current_path).to eq("/merchants/#{merchant1.id}/bulkdiscounts/new")
+
+    fill_in 'threshold', with: 5
+    fill_in 'discount', with: .2
+    click_on 'Create Discount'
+
+    visit "/merchants/#{merchant1.id}/bulkdiscounts"
+
+    expect(page).to have_content("Threshold: 5")
+    expect(page).to have_content("20.0%")
+  end
 end
