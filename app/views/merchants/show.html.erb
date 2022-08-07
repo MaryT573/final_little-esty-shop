@@ -4,6 +4,7 @@
 
 <%= link_to "My Items", "/merchants/#{@merchant.id}/items" %>
 <%= link_to "My Invoices", "/merchants/#{@merchant.id}/invoices" %>
+<%= link_to "View Discounts", "/merchants/#{@merchant.id}/bulkdiscounts" %>
 
 <div id="favorite-customers"><h5>Favorite Customers</h5>
 <% @merchant.favorite_customers.each_with_index do |customer, index| %>
