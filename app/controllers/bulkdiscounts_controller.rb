@@ -15,7 +15,12 @@ class BulkdiscountsController < ApplicationController
 
   def create
     merchant = Merchant.find(params[:merchant_id])
-    merchant.bulkdiscounts.create(discount: params[:discount], threshold: params[:threshold])
-    redirect_to "/merchants/#{merchant.id}/bulkdiscounts"
+    if params[:discount] > "1"
+      redirect_to "/merchants/#{merchant.id}/bulkdiscounts/new"
+      flash[:alert] = "Can only accept numbers below 1"
+    else
+      merchant.bulkdiscounts.create(discount: params[:discount], threshold: params[:threshold])
+      redirect_to "/merchants/#{merchant.id}/bulkdiscounts"
+    end
   end
 end
