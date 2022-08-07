@@ -9,10 +9,11 @@ Rails.application.routes.draw do
 
   get '/admin/merchants', to: 'admin/merchants#index'
   patch '/admin/merchants', to: 'admin/merchants#index'
-  
+
   resources :merchants, except: [:show] do
     resources :items, only: [:index, :show, :edit, :update, :new]
     resources :invoices, only: [:index, :show, :update]
+    resources :bulkdiscounts, only: [:index, :show]
   end
 
   namespace :admin do
