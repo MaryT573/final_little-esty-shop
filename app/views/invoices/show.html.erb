@@ -34,3 +34,13 @@
 </tbody>
 </table>
 </div>
+
+<div id="total_rev">
+  <h3>Total Revenue</h3>
+    <%= number_to_currency(@invoice.total_revenue) %>
+</div>
+
+<div id="discounted_rev">
+  <h3>Discounted Revenue</h3>
+    <%= number_to_currency(@invoice.total_revenue - @invoice.discounted/100) %>
+</div>
