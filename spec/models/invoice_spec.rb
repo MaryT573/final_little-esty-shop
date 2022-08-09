@@ -60,25 +60,6 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'class methods' do
-    it 'can find by merchant' do
-      customer_1 = Customer.create!(first_name: "A", last_name: "A")
-
-      i1 = Invoice.create!(status: "completed", customer_id: customer_1.id, created_at: "2012-03-26 09:54:49 UTC")
-      i2 = Invoice.create!(status: "in progress", customer_id: customer_1.id, created_at: "2012-03-27 05:54:50 UTC")
-      i3 = Invoice.create!(status: "in progress", customer_id: customer_1.id, created_at: "2012-03-22 21:54:50 UTC")
-
-      merchant_1 = Merchant.create!(name: "Wizards Chest")
-      merchant_2 = Merchant.create!(name: "Wizards Chest")
-
-      item1 = Item.create!(name: "A", description: "A", unit_price: 100, merchant_id: merchant_1.id)
-      item2 = Item.create!(name: "B", description: "B", unit_price: 250, merchant_id: merchant_2.id)
-
-      invoice_item_1 = InvoiceItem.create!(item_id: item1.id, invoice_id: i1.id, status: "packaged", quantity: 5, unit_price: 100)
-      invoice_item_2 = InvoiceItem.create!(item_id: item2.id, invoice_id: i2.id, status: "pending", quantity: 5, unit_price: 100)
-      invoice_item_3 = InvoiceItem.create!(item_id: item2.id, invoice_id: i3.id, status: "pending", quantity: 5, unit_price: 100)
-
-      expect(Invoice.find_with_merchant(merchant_2)).to eq([i2, i3])
-    end
 
     it 'can calculate discount' do
       merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")

@@ -4,7 +4,7 @@ class InvoicesController < ApplicationController
   before_action :find_invoice_item, only: [:update]
 
   def index
-    @invoices = Invoice.find_with_merchant(@merchant)
+    @invoices = @merchant.invoices
   end
 
   def show
