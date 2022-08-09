@@ -40,7 +40,7 @@ RSpec.describe 'Bulkdiscount show' do
     expect(page).to_not have_content("20.0%")
   end
 
-  xit 'can update partial discount' do
+  it 'can update partial discount' do
     merchant = Merchant.create!(name: "Wizards Chest")
     discount = merchant.bulkdiscounts.create!(discount: 0.2, threshold: 4)
 
