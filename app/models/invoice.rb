@@ -30,9 +30,4 @@ class Invoice < ApplicationRecord
     .group('invoice_items.id')
     .sum(&:total_discount)
   end
-
-  def self.find_with_merchant(merchant)
-    merchant.invoices
-  end
-
 end

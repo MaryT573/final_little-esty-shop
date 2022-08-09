@@ -201,7 +201,7 @@ RSpec.describe 'Invoice Show', type: :feature, vcr: 'tests', :allow_playback_rep
     invoice_item_2 = InvoiceItem.create!(id: 2, item_id: item_2.id, invoice_id: invoice_1.id, status: 'packaged', quantity: 2, unit_price: 3984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
 
     visit merchant_invoice_path(merchant_1, invoice_1)
-
+    
     within "#invoice_item-#{invoice_item_2.id}" do
       expect(page).to_not have_link("View Discount")
     end
@@ -210,6 +210,7 @@ RSpec.describe 'Invoice Show', type: :feature, vcr: 'tests', :allow_playback_rep
       expect(page).to have_link("View Discount")
       click_link("View Discount")
     end
+
     expect(current_path).to eq("/merchants/#{merchant_1.id}/bulkdiscounts/#{discount.id}")
   end
 end
