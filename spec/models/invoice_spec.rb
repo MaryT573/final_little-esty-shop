@@ -76,8 +76,24 @@ RSpec.describe Invoice, type: :model do
       invoice_item_1 = InvoiceItem.create!(item_id: item1.id, invoice_id: i1.id, status: "packaged", quantity: 5, unit_price: 100)
       invoice_item_2 = InvoiceItem.create!(item_id: item2.id, invoice_id: i2.id, status: "pending", quantity: 5, unit_price: 100)
       invoice_item_3 = InvoiceItem.create!(item_id: item2.id, invoice_id: i3.id, status: "pending", quantity: 5, unit_price: 100)
-      
+
       expect(Invoice.find_with_merchant(merchant_2)).to eq([i2, i3])
+    end
+
+    it 'can calculate discount' do
+      merchant_1 = Merchant.create!(id: 1, name: "Pokemon Card Shop", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
+
+      discount = merchant_1.bulkdiscounts.create!(discount: 0.2, threshold: 3)
+
+      item_1 = merchant_1.items.create!(id: 1, merchant_id: merchant_1.id, name: "Charizard Rare", description: "Mint Condition Charizard", unit_price: 13984, created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC")
+
+      customer_1 = Customer.create!(id: 1, first_name: "John", last_name: "Doe", created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-28 14:54:10 UTC")
+
+      invoice_1 = customer_1.invoices.create!(id: 10, status: "in progress", created_at: "2013-03-27 14:54:10 UTC", updated_at: "2013-03-28 14:54:10 UTC", customer_id: customer_1.id)
+
+      invoice_item_1 = InvoiceItem.create!(id: 1, item_id: item_1.id, invoice_id: invoice_1.id, status: 'pending', quantity: 4, unit_price: 13984, created_at: "2013-03-29 14:54:10 UTC", updated_at: "2013-03-29 14:54:10 UTC")
+
+      expect(invoice_1.discounted/100).to eq(11187.2)
     end
   end
 end

@@ -29,7 +29,6 @@ class Invoice < ApplicationRecord
     .select('invoice_items.id, max(invoice_items.quantity * invoice_items.unit_price * (bulkdiscounts.discount * 100.0)) as total_discount')
     .group('invoice_items.id')
     .sum(&:total_discount)
-    #require "pry"; binding.pry
   end
 
   def self.find_with_merchant(merchant)
