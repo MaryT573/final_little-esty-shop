@@ -128,7 +128,7 @@ RSpec.describe 'Admin Show Page', type: :feature, vcr: 'tests', :allow_playback_
     visit 'admin/invoices/10'
 
     within "#total_rev" do
-      expect(page).to have_content("$49,920.00")
+      expect(page).to have_content("$63,904.00")
     end
 
     within "#discounted_rev" do
