@@ -2,12 +2,13 @@ class InvoicesController < ApplicationController
   before_action :find_merchant, only: [:index, :show, :update]
   before_action :find_invoice, only: [:show, :update]
   before_action :find_invoice_item, only: [:update]
-  
+
   def index
     @invoices = Invoice.find_with_merchant(@merchant)
   end
 
   def show
+    @bulk = @merchant.bulkdiscounts
   end
 
   def update
