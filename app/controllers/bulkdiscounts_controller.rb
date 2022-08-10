@@ -3,6 +3,7 @@ class BulkdiscountsController < ApplicationController
 
   def index
     @discounts = @merchant.bulkdiscounts
+    @holidays = HolidayFacade.upcoming
   end
 
   def show
